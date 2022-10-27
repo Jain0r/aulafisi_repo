@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/schedule.css' %}">
+{% endblock %}
+
+{% block banner %}
+
+<div class="section no-pad-bot" id="index-banner">
+	<div class="container">
+		<br><br>
+		<h2 class="header orange-text center">Horario</h2>
+		<h5 class="header col s12 light center">¿Qué es lo siguiente en la lista?</h5>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="section">
+	<h4>Cursos</h4>
+	<div class="divider"></div>
+</div>
+{% comment %} //align-middle text center {% endcomment %}
+<div class="container">
+    <div class="timetable-img text-center">
+        <img src="img/content/timetable.png" alt="">
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <caption>Horario</caption>
+            <thead>
+                <tr class="bg-light-gray">
+                    <th id="Hora" class="text-uppercase text-center">Hora</th>
+                    <th id="Lunes" class="text-uppercase text-center">Lunes</th>
+                    <th id="Martes" class="text-uppercase text-center">Martes</th>
+                    <th id="Miércoles" class="text-uppercase text-center">Miércoles</th>
+                    <th id="Jueves" class="text-uppercase text-center">Jueves</th>
+                    <th id="Viernes" class="text-uppercase text-center">Viernes</th>
+                    <th id="Sábado" class="text-uppercase text-center">Sábado</th>
+                    <th id="Domingo" class="text-uppercase text-center">Domingo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list_course in courses %}
+                    <tr>
+                        <td class="align-middle text-center">{{ list_course.0.time_start|time:'H:i' }}</td>
+                        {% for course in list_course %}
+                            {% if course != None %}
+                                    <td>
+                                        <div class="align-middle text-center"><span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13 center">{{ course }}</span></div>
+                                        <div class="margin-10px-top margin-10px-left font-size14 align-middle text-center">{{ course.time_start|time:'H:i' }}-{{ course.time_end|time:'H:i' }}</div>
+                                        <div class="font-size13 text-light-gray align-middle text-center">{{ course.user }}</div>
+                                    </td>
+                            {%else%}
+                                <td>
+                                    <div class="margin-10px-top margin-10px-left font-size14 text-center"></div>
+                                </td>  
+                            {%endif%}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

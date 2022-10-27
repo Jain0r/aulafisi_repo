@@ -1,0 +1,7 @@
+{% extends 'newassignment.html' %}
+{% load static %}
+
+        
+{% block link %}
+  <a href="{% url 'assignment-delete' course_id module_id assignment_id %}" class="btn red waves-effect waves-light">Eliminar</a>
+{% endblock %}
